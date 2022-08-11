@@ -1,0 +1,17 @@
+UserDefaults :
+
+
+//For saving the data
+UserDefaults.standard.set(<datainanyform>, forKey:”KeyName”)
+
+Datainanyform —> It may be string, image, int any type
+
+
+
+//For Retrieve the data
+
+data = UserDefaults.standard.value(forKey: key)
+
+Data -> It would be value what you saved 
+
+Key -> String that you used
