@@ -1,0 +1,68 @@
+ //Connecting To a Wifi 
+//Using Swift Code
+///Import -> HotSpot Configuration in Capability in your xcode
+
+
+    func connect (_ SSID : String , _ PASSWORD : String) {
+        
+        let configuration = NEHotspotConfiguration.init(ssid: SSID, passphrase: PASSWORD, isWEP: false)
+        configuration.joinOnce = false
+        //ProgressHUD.show("Connecting...")
+        DispatchQueue.main.async {
+            
+            NEHotspotConfigurationManager.shared.apply(configuration) { (error) in
+                
+                if error != nil {
+                   
+                    if error?.localizedDescription == "already associated."
+                    {
+                        print("Already Connected")
+                        
+                        self.titleText = "Already Connected"
+                        self.messageText = "You'r Already on this Network \(SSID)"
+                        self.dismiss(animated: true, completion: nil)
+                        //ProgressHUD.dismiss()
+                        self.showAlert(self.titleText,self.messageText)
+                        
+                    }
+                    
+                }
+                else {
+                    print("Connected")
+                    
+                    self.titleText = "Connected"
+                    self.messageText = "Connected to \(SSID)"
+                    ProgressHUD.dismiss()
+                    self.dismiss(animated: true, completion: nil)
+                    let currentWifi = self.getWiFiSsid() ?? "NOT Connected"
+                    
+                    if currentWifi == SSID{
+                        self.showAlert(self.titleText,self.messageText)
+                    }
+                    
+                    
+                }
+            }
+        }
+        
+    }
+
+
+
+//To check on Which Wifi is device Connected
+
+//Import -> Access Wifi Configuration in Capability (xcode)
+
+
+ func getWiFiSsid() -> String? {
+        var ssid: String?
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+        }
+        return ssid
+    }
