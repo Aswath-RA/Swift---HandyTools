@@ -1,3 +1,3 @@
 Hi 
 
-This Repo Contains the necessary Tools and code ,  which an Ios Developer Might want in every day
+This Repo Contains the necessary Tools and code ,  which an Ios Developer Might need in every day
