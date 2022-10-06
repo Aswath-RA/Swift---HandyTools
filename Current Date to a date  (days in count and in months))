@@ -1,0 +1,43 @@
+ //Getting current date
+func getCurrentDate() -> String {
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: Date())
+    }
+
+
+
+//Days between now to that date
+func daysBetween(start: Date, end: Date) -> Int? {
+    return Calendar.current.dateComponents([.day], from: start, to: end).day
+    }
+
+
+//Starting date to ending Subscription date
+let formattere = DateFormatter()
+formattere.dateFormat = "yyyy-MM-dd"
+let firstDate = formattere.date(from: getCurrentDate())
+let secondDate = formattere.date(from: "2022-10-07")
+
+let dateFormatterGet = DateFormatter()
+dateFormatterGet.dateFormat = "yyyy-MM-dd" //Input Format
+
+let dateFormatterPrint = DateFormatter()
+dateFormatterPrint.dateFormat = "MMMM dd,yyyy" //Output Format
+
+if let sunScriptionDays = daysBetween(start: firstDate!, end: secondDate!) {
+    if  sunScriptionDays <= 15 {
+        print("Your Subscription will end in \(sunScriptionDays) Days")
+
+    }else {
+        if let date = dateFormatterGet.date(from: "2022-10-07") {
+            print("Your Subscription will end on \(dateFormatterPrint.string(from: date))")
+        } else {
+           print("There was an error decoding the string")
+        }
+    }
+
+}else {
+
+}
