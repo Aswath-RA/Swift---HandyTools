@@ -51,10 +51,11 @@ func convertToPdfFileAndShare(){
             activityViewController.popoverPresentationController?.sourceView=self.view
             
             //If user on iPad
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                if activityViewController.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+             if UIDevice.current.userInterfaceIdiom == .pad {
+                    // 4. set its sourceRect here. It's the same as in step 2
+                    activityViewController.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+                    activityViewController.popoverPresentationController?.permittedArrowDirections = []
                 }
-            }
             present(activityViewController, animated: true, completion: nil)
 
         }
